@@ -15,8 +15,5 @@ requires "nim >= 1.6.12"
 
 ## Hashing
 
-requires "argon2 >= 1.3.0"
-
 ## Encoding
 
-requires base64 >= 0.3.0"

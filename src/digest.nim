@@ -1,5 +1,5 @@
 import std/parseopt, os
-import base64
+import digestpkg/encoding, digestpkg/hashing
 
 proc parseArgs(): (string, string) =
   var algorithm: string = ""
@@ -26,14 +26,16 @@ proc parseArgs(): (string, string) =
 proc generateDigest(algorithm: string, input: string): string =
   case algorithm
   of "base64":
-    return base64.encode(input)
+    return encoding.doBase64(input)
+  of "md5":
+    return hashing.doMd5(input)
+  of "sha1":
+    return hashing.doSha1(input)
   else:
     raise newException(Exception, "Unsupported algorithm")
 
 proc main() =
   var (algorithm, input) = parseArgs()
-  echo algorithm
-  echo input
   echo generateDigest(algorithm, input)
 
 when isMainModule:
